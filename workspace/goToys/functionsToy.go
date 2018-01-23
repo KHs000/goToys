@@ -11,6 +11,17 @@ func getGreater (xs ...int) (greatest int) {
 	return
 }
 
+func fib (n int) int {
+	switch n {
+	case 0:
+		return 0
+	case 1:
+		return 1
+	default:
+		return fib (n - 1) + fib (n - 2)
+	}
+}
+
 func main () {
-	fmt.Println(getGreater(2, 5, 2, 6, 8, 3, 5, 19, 12, 4))
+	fmt.Println(fib(5))
 }
