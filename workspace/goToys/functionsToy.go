@@ -22,6 +22,19 @@ func fib (n int) int {
 	}
 }
 
+func square(x *float64) float64{
+  	*x = *x * *x
+  	return *x
+}
+
+func swapIntegers (x, y *int) (newX, newY int) {
+	swap := *x
+	newX = *y
+	newY = swap
+
+	return
+}
+
 func main () {
-	fmt.Println(fib(5))
+  	fmt.Println(fib(5))
 }
