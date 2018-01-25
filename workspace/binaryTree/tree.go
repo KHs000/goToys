@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type node struct {
 	left   *node
@@ -52,6 +54,12 @@ func extractSurrodingValue(tree *node) (l, r, p int) {
 	return
 }
 
+func printWalkStep(v, l, r, p int) {
+	fmt.Println("Current node ->")
+	fmt.Printf("Value: %d Left: %v Right: %v Parent: %v \n", v, l, r, p)
+	fmt.Print("Input: ")
+}
+
 func treeWalk(tree *node) {
 	fmt.Println(" --- Tree Walking --- ")
 	fmt.Println("Tree root ->")
@@ -67,28 +75,19 @@ func treeWalk(tree *node) {
 			tree = tree.left
 			var lValue, rValue, pValue int
 			lValue, rValue, pValue = extractSurrodingValue(tree)
-
-			fmt.Println("Current node ->")
-			fmt.Printf("Value: %d Left: %v Right: %v Parent: %v \n", tree.value, lValue, rValue, pValue)
-			fmt.Print("Input: ")
+			printWalkStep(tree.value, lValue, rValue, pValue)
 			fmt.Scanf("%d", &input)
 		case 2:
 			tree = tree.right
 			var lValue, rValue, pValue int
 			lValue, rValue, pValue = extractSurrodingValue(tree)
-
-			fmt.Println("Current node ->")
-			fmt.Printf("Value: %d Left: %v Right: %v Parent: %v \n", tree.value, lValue, rValue, pValue)
-			fmt.Print("Input: ")
+			printWalkStep(tree.value, lValue, rValue, pValue)
 			fmt.Scanf("%d", &input)
 		case 3:
 			tree = tree.parent
 			var lValue, rValue, pValue int
 			lValue, rValue, pValue = extractSurrodingValue(tree)
-
-			fmt.Println("Current node ->")
-			fmt.Printf("Value: %d Left: %v Right: %v Parent: %v \n", tree.value, lValue, rValue, pValue)
-			fmt.Print("Input: ")
+			printWalkStep(tree.value, lValue, rValue, pValue)
 			fmt.Scanf("%d", &input)
 		case 0:
 			fmt.Println("Exiting...")
