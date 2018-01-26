@@ -54,11 +54,6 @@ func extractSurrodingValue(tree *node) (l, r, p int) {
 	return
 }
 
-func takeInput(intput *int) {
-	fmt.Print("Input: ")
-	fmt.Scanf("%d", &input)
-}
-
 func printWalkStep(v, l, r, p int) {
 	fmt.Print("Current node -> ")
 	fmt.Printf("Value: %d Left: %v Right: %v Parent: %v \n", v, l, r, p)
@@ -73,28 +68,39 @@ func treeWalk(tree *node) {
 	fmt.Printf("1 - Go left\n2 - Go Right\n3 - Go up\n0 - Go home\n")
 
 	/* Initial input */
-	var input *int
+	var input int
+	fmt.Print("Input: ")
+	fmt.Scanf("%d", &input)
 
 	for input != 0 {
 		switch input {
 		case 1:
 			if tree.left == nil {
 				panic("I cannon't move that way")
+			} else {
+				tree = tree.left
+				lValue, rValue, pValue := extractSurrodingValue(tree)
+				printWalkStep(tree.value, lValue, rValue, pValue)
+				fmt.Scanf("%d", &input)
 			}
-			tree = tree.left
-			lValue, rValue, pValue := extractSurrodingValue(tree)
-			printWalkStep(tree.value, lValue, rValue, pValue)
-			fmt.Scanf("%d", &input)
 		case 2:
-			tree = tree.right
-			lValue, rValue, pValue := extractSurrodingValue(tree)
-			printWalkStep(tree.value, lValue, rValue, pValue)
-			fmt.Scanf("%d", &input)
+			if tree.right == nil {
+				panic("I cannon't move that way")
+			} else {
+				tree = tree.right
+				lValue, rValue, pValue := extractSurrodingValue(tree)
+				printWalkStep(tree.value, lValue, rValue, pValue)
+				fmt.Scanf("%d", &input)
+			}
 		case 3:
-			tree = tree.parent
-			lValue, rValue, pValue := extractSurrodingValue(tree)
-			printWalkStep(tree.value, lValue, rValue, pValue)
-			fmt.Scanf("%d", &input)
+			if tree.parent == nil {
+				panic("I cannon't move that way")
+			} else {
+				tree = tree.parent
+				lValue, rValue, pValue := extractSurrodingValue(tree)
+				printWalkStep(tree.value, lValue, rValue, pValue)
+				fmt.Scanf("%d", &input)
+			}
 		case 0:
 			fmt.Println("Exiting...")
 		}
